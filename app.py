@@ -27,8 +27,8 @@ user = {
 
 
 str_input = ""
-command = ["00", "01", "02", "03", "07", "09", "10", "37", "41", "44", "47", "54",
-           "59", "69", "75", "78", "79", "90", "123", "456"]
+command = ["00", "01", "02", "03", "04", "05", "07", "09", "10", "37",
+           "41", "44", "47", "54", "59", "69", "75", "78", "79", "90", "123", "456"]
 
 
 class Ui_MainWindow(object):
@@ -147,8 +147,7 @@ class Ui_MainWindow(object):
         self.signalLabel = QtWidgets.QLabel(self.centralwidget)
         self.signalLabel.setGeometry(QtCore.QRect(10, 10, 31, 15))
         self.signalLabel.setStyleSheet("border-image: url(img/signal.svg)")
-        # self.signalLabel.setPixmap(QtGui.QPixmap("img/signal.svg"))
-        
+
         # Count Label
         self.countLabel = QtWidgets.QLabel(self.centralwidget)
         self.countLabel.setGeometry(QtCore.QRect(180, 10, 21, 16))
@@ -203,7 +202,6 @@ class Ui_MainWindow(object):
         self.outputLabel.setText(f"{user['kwh']}")
         self.signalLabel.setStyleSheet("border-image: url(img/signal.svg)")
 
-
     def cmd_00(self):
         self.unitLabel.setText("kW h")
         self.signalLabel.setStyleSheet("border-image: url(img/signal.svg)")
@@ -211,51 +209,73 @@ class Ui_MainWindow(object):
         self.outputLabel.setText(f"000000000000")
 
     def cmd_01(self):
+        self.signalLabel.setStyleSheet("")
         self.countLabel.setText("01")
         self.outputLabel.setText("b e n a r")
 
     def cmd_03(self):
+        self.signalLabel.setStyleSheet("")
         self.countLabel.setText("03")
         self.unitLabel.setText("kW h")
         self.outputLabel.setText("123192")
 
+    def cmd_04(self):
+        self.signalLabel.setStyleSheet("")
+        self.countLabel.setText("04")
+        self.unitLabel.setText("")
+        self.outputLabel.setText(f"Kco{' '*13}02")
+
+    def cmd_05(self):
+        self.signalLabel.setStyleSheet("")
+        self.countLabel.setText("05")
+        self.unitLabel.setText("")
+        self.outputLabel.setText(f"t i{' '*16}02")
+
     def cmd_07(self):
+        self.signalLabel.setStyleSheet("")
         self.countLabel.setText("07")
         self.unitLabel.setText("kW")
         self.outputLabel.setText("PL           1530")
 
     def cmd_09(self):
+        self.signalLabel.setStyleSheet("")
         self.countLabel.setText("09")
         self.unitLabel.setText("kW")
         self.outputLabel.setText("P             0039")
 
     def cmd_10(self):
+        self.signalLabel.setStyleSheet("")
         self.countLabel.setText("10")
         self.unitLabel.setText("")
         self.outputLabel.setText("Ver              10")
 
     def cmd_37(self):
+        self.signalLabel.setStyleSheet("border-image: url(img/signal.svg)")
         self.unitLabel.setText("kW h")
         self.countLabel.setText("37")
         self.outputLabel.setText(f"{user['kwh']}")
 
     def cmd_41(self):
+        self.signalLabel.setStyleSheet("")
         self.countLabel.setText("41")
         self.unitLabel.setText("V")
         self.outputLabel.setText("229.6")
 
     def cmd_44(self):
+        self.signalLabel.setStyleSheet("")
         self.countLabel.setText("44")
         self.unitLabel.setText("A")
         self.outputLabel.setText("0.956")
 
     def cmd_47(self):
+        self.signalLabel.setStyleSheet("")
         self.countLabel.setText("47")
         self.unitLabel.setText("kW")
         self.outputLabel.setText(
             f'P{" "*12}{round(user["41"]*user["47"]/1000, 3)}')
 
     def cmd_54(self):
+        self.signalLabel.setStyleSheet("")
         self.countLabel.setText("54")
         self.unitLabel.setText("")
         self.outputLabel.setText(f"{user['54']}")
@@ -264,8 +284,10 @@ class Ui_MainWindow(object):
         self.countLabel.setText("59")
         self.unitLabel.setText("kW h")
         self.outputLabel.setText(f"{user['59']}")
+        self.signalLabel.setStyleSheet("")
 
     def cmd_69(self):
+        self.signalLabel.setStyleSheet("")
         self.countLabel.setText("69")
         self.unitLabel.setText("")
         self.outputLabel.setText(f"{user['69']}")
@@ -274,26 +296,32 @@ class Ui_MainWindow(object):
         self.countLabel.setText("75")
         self.unitLabel.setText("")
         self.outputLabel.setText(f"{user['75'][0:9]}")
+        self.signalLabel.setStyleSheet("")
 
     def cmd_75_2(self):
         self.outputLabel.setText(f"{user['75'][10::]}")
+        self.signalLabel.setStyleSheet("")
 
     def cmd_78(self):
         self.countLabel.setText("78")
         self.unitLabel.setText("")
         self.outputLabel.setText(f"{user['78']}")
+        self.signalLabel.setStyleSheet("")
 
     def cmd_79(self):
         self.countLabel.setText("79")
         self.unitLabel.setText("kW h")
         self.outputLabel.setText(f"{user['79']}0")
+        self.signalLabel.setStyleSheet("")
 
     # Matikan lampu LED
     def cmd_90(self):
+        self.signalLabel.setStyleSheet("")
         self.countLabel.setText("90")
-        self.outputLabel.setText("n i h i l")
+        self.outputLabel.setText(f"n i h i l{' '*6}")
 
     def cmd_123(self, inp):
+        self.signalLabel.setStyleSheet("")
         if len(inp) == 5:
             self.countLabel.setText("08")
             self.outputLabel.setText(f"gagal{' '*7}")
@@ -303,6 +331,7 @@ class Ui_MainWindow(object):
             self.outputLabel.setText(user["78"])
 
     def cmd_456(self, inp):
+        self.signalLabel.setStyleSheet("")
         self.countLabel.setText("")
         self.unitLabel.setText("kW h")
         if int(str_input[3:5]) >= 5:
@@ -330,6 +359,10 @@ class Ui_MainWindow(object):
                 self.cmd_01()
             elif str_input == "03":
                 self.cmd_03()
+            elif str_input == "04":
+                self.cmd_04()
+            elif str_input == "05":
+                self.cmd_05()
             elif str_input == "07":
                 self.cmd_07()
             elif str_input == "09":
