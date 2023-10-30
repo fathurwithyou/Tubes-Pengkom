@@ -350,55 +350,78 @@ class Ui_MainWindow(object):
         elif pressed == "del":
             strInput = strInput[:-1]
         elif pressed == "enter":
+            reset = False
             if len(strInput) == 20:
                 self.outputLabel.setText(self.fillToken(strInput))
+                reset = True
             elif strInput == "00":
                 self.cmd_00()
+                reset = True
             elif strInput == "01":
                 self.cmd_01()
+                reset = True
             elif strInput == "03":
                 self.cmd_03()
+                reset = True
             elif strInput == "04":
                 self.cmd_04()
+                reset = True
             elif strInput == "05":
                 self.cmd_05()
+                reset = True
             elif strInput == "07":
                 self.cmd_07()
+                reset = True
             elif strInput == "09":
                 self.cmd_09()
+                reset = True
             elif strInput == "10":
                 self.cmd_10()
+                reset = True
             elif strInput == "37":
                 self.cmd_37()
+                reset = True
             elif strInput == "41":
                 self.cmd_41()
+                reset = True
             elif strInput == "44":
                 self.cmd_44()
+                reset = True
             elif strInput == "47":
                 self.cmd_47()
+                reset = True
             elif strInput == "54":
                 self.cmd_54()
+                reset = True
             elif strInput == "59":
                 self.cmd_59()
+                reset = True
             elif strInput == "69":
                 self.cmd_69()
+                reset = True
             elif strInput == "75":
                 self.cmd_75_1()
                 delay = 3000
                 timer.singleShot(delay, self.cmd_75_2)
+                reset = True
             elif strInput == "78":
                 self.cmd_78()
+                reset = True
             elif strInput == "79":
                 self.cmd_79()
+                reset = True
             elif len(strInput) in [5, 6]:
                 if strInput[:3] == "123":
                     self.cmd_123(strInput)
+                    reset = True
                 elif strInput[:3] == "456" and len(strInput) == 5:
                     self.cmd_456(strInput)
+                    reset = True
             elif strInput == "90":
                 self.cmd_90()
+                reset = True
 
-            if strInput in command or len(strInput) == 20 or strInput[:3] in command:
+            if reset:
                 delay += 3000
                 strInput = ""
         if strInput == "":
@@ -411,7 +434,7 @@ class Ui_MainWindow(object):
             else:
                 self.countLabel.setText(f"{len(strInput)}")
             self.outputLabel.setText(
-                re.sub(r'(\d{4})(?=\d)', r'\1 - ', strInput))
+                '-'.join(strInput[i:i+4] for i in range(0, len(strInput), 4)))
 
     # Translate Button Meaning
     def retranslateUi(self, MainWindow):
