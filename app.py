@@ -26,7 +26,7 @@ user = {
 }
 
 
-str_input = ""
+strInput = ""
 command = ["00", "01", "02", "03", "04", "05", "07", "09", "10", "37",
            "41", "44", "47", "54", "59", "69", "75", "78", "79", "90", "123", "456"]
 
@@ -204,121 +204,120 @@ class Ui_MainWindow(object):
 
     def cmd_00(self):
         self.unitLabel.setText("kW h")
-        self.signalLabel.setStyleSheet("border-image: url(img/signal.svg)")
         self.countLabel.setText("00")
         self.outputLabel.setText(f"000000000000")
+        self.signalLabel.setStyleSheet("border-image: url(img/signal.svg)")
 
     def cmd_01(self):
-        self.signalLabel.setStyleSheet("")
         self.countLabel.setText("01")
         self.outputLabel.setText("b e n a r")
+        self.signalLabel.setStyleSheet("")
 
     def cmd_03(self):
-        self.signalLabel.setStyleSheet("")
-        self.countLabel.setText("03")
         self.unitLabel.setText("kW h")
+        self.countLabel.setText("03")
         self.outputLabel.setText("123192")
+        self.signalLabel.setStyleSheet("")
 
     def cmd_04(self):
-        self.signalLabel.setStyleSheet("")
-        self.countLabel.setText("04")
         self.unitLabel.setText("")
+        self.countLabel.setText("04")
         self.outputLabel.setText(f"Kco{' '*13}02")
+        self.signalLabel.setStyleSheet("")
 
     def cmd_05(self):
-        self.signalLabel.setStyleSheet("")
-        self.countLabel.setText("05")
         self.unitLabel.setText("")
+        self.countLabel.setText("05")
         self.outputLabel.setText(f"t i{' '*16}02")
+        self.signalLabel.setStyleSheet("")
 
     def cmd_07(self):
-        self.signalLabel.setStyleSheet("")
-        self.countLabel.setText("07")
         self.unitLabel.setText("kW")
+        self.countLabel.setText("07")
         self.outputLabel.setText("PL           1530")
+        self.signalLabel.setStyleSheet("")
 
     def cmd_09(self):
-        self.signalLabel.setStyleSheet("")
-        self.countLabel.setText("09")
         self.unitLabel.setText("kW")
+        self.countLabel.setText("09")
         self.outputLabel.setText("P             0039")
+        self.signalLabel.setStyleSheet("")
 
     def cmd_10(self):
-        self.signalLabel.setStyleSheet("")
-        self.countLabel.setText("10")
         self.unitLabel.setText("")
+        self.countLabel.setText("10")
         self.outputLabel.setText("Ver              10")
+        self.signalLabel.setStyleSheet("")
 
     def cmd_37(self):
-        self.signalLabel.setStyleSheet("border-image: url(img/signal.svg)")
         self.unitLabel.setText("kW h")
         self.countLabel.setText("37")
         self.outputLabel.setText(f"{user['kwh']}")
+        self.signalLabel.setStyleSheet("border-image: url(img/signal.svg)")
 
     def cmd_41(self):
-        self.signalLabel.setStyleSheet("")
-        self.countLabel.setText("41")
         self.unitLabel.setText("V")
+        self.countLabel.setText("41")
         self.outputLabel.setText("229.6")
+        self.signalLabel.setStyleSheet("")
 
     def cmd_44(self):
-        self.signalLabel.setStyleSheet("")
-        self.countLabel.setText("44")
         self.unitLabel.setText("A")
+        self.countLabel.setText("44")
         self.outputLabel.setText("0.956")
+        self.signalLabel.setStyleSheet("")
 
     def cmd_47(self):
-        self.signalLabel.setStyleSheet("")
-        self.countLabel.setText("47")
         self.unitLabel.setText("kW")
+        self.countLabel.setText("47")
         self.outputLabel.setText(
             f'P{" "*12}{round(user["41"]*user["47"]/1000, 3)}')
+        self.signalLabel.setStyleSheet("")
 
     def cmd_54(self):
-        self.signalLabel.setStyleSheet("")
-        self.countLabel.setText("54")
         self.unitLabel.setText("")
+        self.countLabel.setText("54")
         self.outputLabel.setText(f"{user['54']}")
+        self.signalLabel.setStyleSheet("")
 
     def cmd_59(self):
-        self.countLabel.setText("59")
         self.unitLabel.setText("kW h")
+        self.countLabel.setText("59")
         self.outputLabel.setText(f"{user['59']}")
         self.signalLabel.setStyleSheet("")
 
     def cmd_69(self):
-        self.signalLabel.setStyleSheet("")
-        self.countLabel.setText("69")
         self.unitLabel.setText("")
+        self.countLabel.setText("69")
         self.outputLabel.setText(f"{user['69']}")
+        self.signalLabel.setStyleSheet("")
 
     def cmd_75_1(self):
         self.countLabel.setText("75")
-        self.unitLabel.setText("")
         self.outputLabel.setText(f"{user['75'][0:9]}")
         self.signalLabel.setStyleSheet("")
 
     def cmd_75_2(self):
+        self.countLabel.setText("75")
         self.outputLabel.setText(f"{user['75'][10::]}")
         self.signalLabel.setStyleSheet("")
 
     def cmd_78(self):
         self.countLabel.setText("78")
-        self.unitLabel.setText("")
         self.outputLabel.setText(f"{user['78']}")
         self.signalLabel.setStyleSheet("")
 
     def cmd_79(self):
-        self.countLabel.setText("79")
         self.unitLabel.setText("kW h")
+        self.countLabel.setText("79")
         self.outputLabel.setText(f"{user['79']}0")
         self.signalLabel.setStyleSheet("")
 
     # Matikan lampu LED
     def cmd_90(self):
-        self.signalLabel.setStyleSheet("")
         self.countLabel.setText("90")
         self.outputLabel.setText(f"n i h i l{' '*6}")
+        self.signalLabel.setStyleSheet("")
 
     def cmd_123(self, inp):
         self.signalLabel.setStyleSheet("")
@@ -327,15 +326,15 @@ class Ui_MainWindow(object):
             self.outputLabel.setText(f"gagal{' '*7}")
         else:
             user["78"] = inp[3:]
-            self.unitLabel.setText("")
+            self.countLabel.setText("")
             self.outputLabel.setText(user["78"])
 
     def cmd_456(self, inp):
         self.signalLabel.setStyleSheet("")
         self.countLabel.setText("")
         self.unitLabel.setText("kW h")
-        if int(str_input[3:5]) >= 5:
-            user["79"] = float(str_input[3:5])
+        if int(strInput[3:5]) >= 5:
+            user["79"] = float(strInput[3:5])
         else:
             user["79"] = 5.00
         self.outputLabel.setText(f"{user['79']}0")
@@ -343,76 +342,76 @@ class Ui_MainWindow(object):
     # Pressed button function
 
     def press(self, pressed):
-        global str_input
+        global strInput
         timer = QtCore.QTimer()
         delay = 0
         if pressed not in ["del", "enter"]:
-            str_input += pressed
+            strInput += pressed
         elif pressed == "del":
-            str_input = str_input[:-1]
+            strInput = strInput[:-1]
         elif pressed == "enter":
-            if len(str_input) == 20 or len(str_input) == 4:
-                self.outputLabel.setText(self.fillToken(str_input))
-            elif str_input == "00":
+            if len(strInput) == 20:
+                self.outputLabel.setText(self.fillToken(strInput))
+            elif strInput == "00":
                 self.cmd_00()
-            elif str_input == "01":
+            elif strInput == "01":
                 self.cmd_01()
-            elif str_input == "03":
+            elif strInput == "03":
                 self.cmd_03()
-            elif str_input == "04":
+            elif strInput == "04":
                 self.cmd_04()
-            elif str_input == "05":
+            elif strInput == "05":
                 self.cmd_05()
-            elif str_input == "07":
+            elif strInput == "07":
                 self.cmd_07()
-            elif str_input == "09":
+            elif strInput == "09":
                 self.cmd_09()
-            elif str_input == "10":
+            elif strInput == "10":
                 self.cmd_10()
-            elif str_input == "37":
+            elif strInput == "37":
                 self.cmd_37()
-            elif str_input == "41":
+            elif strInput == "41":
                 self.cmd_41()
-            elif str_input == "44":
+            elif strInput == "44":
                 self.cmd_44()
-            elif str_input == "47":
+            elif strInput == "47":
                 self.cmd_47()
-            elif str_input == "54":
+            elif strInput == "54":
                 self.cmd_54()
-            elif str_input == "59":
+            elif strInput == "59":
                 self.cmd_59()
-            elif str_input == "69":
+            elif strInput == "69":
                 self.cmd_69()
-            elif str_input == "75":
+            elif strInput == "75":
                 self.cmd_75_1()
                 delay = 3000
                 timer.singleShot(delay, self.cmd_75_2)
-            elif str_input == "78":
+            elif strInput == "78":
                 self.cmd_78()
-            elif str_input == "79":
+            elif strInput == "79":
                 self.cmd_79()
-            elif len(str_input) in [5, 6]:
-                if str_input[:3] == "123":
-                    self.cmd_123(str_input)
-                elif str_input[:3] == "456" and len(str_input) == 5:
-                    self.cmd_456(str_input)
-            elif str_input == "90":
+            elif len(strInput) in [5, 6]:
+                if strInput[:3] == "123":
+                    self.cmd_123(strInput)
+                elif strInput[:3] == "456" and len(strInput) == 5:
+                    self.cmd_456(strInput)
+            elif strInput == "90":
                 self.cmd_90()
 
-            if str_input in command or len(str_input) == 20 or str_input[:3] in command:
+            if strInput in command or len(strInput) == 20 or strInput[:3] in command:
                 delay += 3000
-                str_input = ""
-        if str_input == "":
+                strInput = ""
+        if strInput == "":
             timer.singleShot(delay, self.showIndicator)
         else:
             self.signalLabel.setStyleSheet("")
             self.unitLabel.setText("")
-            if len(str_input) < 10:
-                self.countLabel.setText(f"0{len(str_input)}")
+            if len(strInput) < 10:
+                self.countLabel.setText(f"0{len(strInput)}")
             else:
-                self.countLabel.setText(f"{len(str_input)}")
+                self.countLabel.setText(f"{len(strInput)}")
             self.outputLabel.setText(
-                re.sub(r'(\d{4})(?=\d)', r'\1 - ', str_input))
+                re.sub(r'(\d{4})(?=\d)', r'\1 - ', strInput))
 
     # Translate Button Meaning
     def retranslateUi(self, MainWindow):
