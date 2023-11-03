@@ -3,7 +3,6 @@
 
 # Module Import Requirements
 from PyQt5 import QtCore, QtGui, QtWidgets
-import re
 import sys
 
 user = {
